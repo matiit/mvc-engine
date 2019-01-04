@@ -1,0 +1,9 @@
+{
+  "autoload": {
+    "psr-4": { "": "src/" }
+  },
+  "require": {
+    "twig/twig": "~1.0",
+    "doctrine/orm": "^2.6"
+  }
+}
