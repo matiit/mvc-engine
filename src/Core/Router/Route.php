@@ -2,68 +2,176 @@
 
 namespace Core\Router;
 
-class Route{
+/**
+ * This is routing file, containing getters & setters
+ * for correct route working.
+ *
+ * Class Route
+ *
+ * @category Routing
+ *
+ * @package Core\Router
+ *
+ * @author Original Author <kamil.ubermade@gmail.com>
+ *
+ * @license The MIT License (MIT)
+ *
+ * @link https://github.com/Ubermade/mvc-engine
+ */
+class Route
+{
+    /**
+     * Url in web browser.
+     *
+     * @var string
+     */
     protected $path;
+    /**
+     * File, which containing controller class.
+     *
+     * @var string
+     */
     protected $file;
+    /**
+     * Controller class.
+     *
+     * @var string
+     */
     protected $class;
+    /**
+     * Function in controller class.
+     *
+     * @var string
+     */
     protected $method;
+    /**
+     * Default content for variables in url.
+     *
+     * @var array
+     */
     protected $defaults;
+    /**
+     * Regex for variables in url.
+     *
+     * @var array
+     */
     protected $params;
 
-    public function __construct(string $path, array $config, array $params = [], array $defaults = []){
+    /**
+     * Route constructor.
+     *
+     * @param string $path
+     * @param array  $config
+     * @param array  $params
+     * @param array  $defaults
+     */
+    public function __construct(
+        string $path,
+        array $config,
+        array $params = [],
+        array $defaults = []
+    ) {
         $this->path = $path;
-        $this->file = 'src/Controller/'.$config['file'];
-        $this->class = 'Controller\\'.$config['class'];
+        $this->file = 'src/Controller/' . $config['file'];
+        $this->class = 'Controller\\' . $config['class'];
         $this->method = $config['method'];
         $this->setParams($params);
         $this->setDefaults($defaults);
     }
 
-    public function setPath(string $path){
-        $this->path = HTTP_SERVER.$path;
-    }
-
-    public function getPath(): string{
+    /**
+     * @return string
+     */
+    public function getPath(): string
+    {
         return $this->path;
     }
 
-    public function setFile(string $controller){
+    /**
+     * @param string $path
+     */
+    public function setPath(string $path): void
+    {
+        $this->path = $path;
+    }
+
+    /**
+     * @param string $controller
+     */
+    public function setFile(string $controller)
+    {
         $this->file = $controller;
     }
 
-    public function getFile(): string{
+    /**
+     * @return string
+     */
+    public function getFile(): string
+    {
         return $this->file;
     }
 
-    public function setClass(string $class){
+    /**
+     * @param string $class
+     */
+    public function setClass(string $class)
+    {
         $this->class = $class;
     }
 
-    public function getClass(): string{
+    /**
+     * @return string
+     */
+    public function getClass(): string
+    {
         return $this->class;
     }
 
-    public function setMethod(string $method){
+    /**
+     * @param string $method
+     */
+    public function setMethod(string $method)
+    {
         $this->method = $method;
     }
 
-    public function getMethod(): string{
+    /**
+     * @return string
+     */
+    public function getMethod(): string
+    {
         return $this->method;
     }
 
-    public function setParams(array $params){
+    /**
+     * @param array $params
+     */
+    public function setParams(array $params)
+    {
         $this->params = $params;
     }
 
-    public function getParams(): array{
+    /**
+     * @return array
+     */
+    public function getParams(): array
+    {
         return $this->params;
     }
 
-    public function setDefaults(array $defaults){
+    /**
+     * @param array
+     */
+    public function setDefaults(array $defaults)
+    {
         $this->defaults = $defaults;
     }
 
-    public function getDefaults(): array{
+    /**
+     * @return array
+     */
+    public function getDefaults(): array
+    {
         return $this->defaults;
     }
 }

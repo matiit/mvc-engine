@@ -2,19 +2,55 @@
 
 namespace Core\Router;
 
-class RouteCollection{
+/**
+ * That's routing collection, management info about routes.
+ *
+ * Class RouteCollection
+ *
+ * @category Routing
+ *
+ * @package Core\Router
+ *
+ * @author Original Author <kamil.ubermade@gmail.com>
+ *
+ * @license The MIT License (MIT)
+ *
+ * @link https://github.com/Ubermade/mvc-engine
+ */
+class RouteCollection
+{
+    /**
+     * @var mixed
+     */
     protected $route;
 
-    public function add($name, $item){
+    /**
+     * @param string $name
+     * @param object $item
+     */
+    public function add(string $name, object $item)
+    {
         $this->route[$name] = $item;
     }
-    public function get($name){
-        if(array_key_exists($name, $this->route)){
+
+    /**
+     * @param  string $name
+     * @return array|null
+     */
+    public function get(string $name):? array
+    {
+        if (array_key_exists($name, $this->route)) {
             return $this->route[$name];
         }
+
         return null;
     }
-    public function getAll(){
+
+    /**
+     * @return array
+     */
+    public function getAll():? array
+    {
         return $this->route;
     }
 }
