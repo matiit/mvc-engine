@@ -4,7 +4,7 @@ include __DIR__.'/vendor/autoload.php';
 require_once __DIR__.'/src/config.php';
 require_once __DIR__.'/src/routes.php';
 
-$router = new \Core\Router\Router('http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
+$router = new \Core\Router\Router(SERVER_PROTOCOL.'://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
 
 $router->run();
 
