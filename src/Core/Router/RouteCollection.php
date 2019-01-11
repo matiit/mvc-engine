@@ -20,9 +20,9 @@ namespace Core\Router;
 class RouteCollection
 {
     /**
-     * @var mixed
+     * @var array
      */
-    protected $route;
+    protected $route = [];
 
     /**
      * @param string $name
