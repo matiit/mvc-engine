@@ -26,18 +26,18 @@ class RouteCollection
 
     /**
      * @param string $name
-     * @param object $item
+     * @param Route $item
      */
-    public function add(string $name, object $item)
+    public function add(string $name, Route $item)
     {
         $this->route[$name] = $item;
     }
 
     /**
      * @param  string $name
-     * @return string|null
+     * @return Route|null
      */
-    public function get(string $name): ?string
+    public function get(string $name): ?Route
     {
         if (array_key_exists($name, $this->route)) {
             return $this->route[$name];
