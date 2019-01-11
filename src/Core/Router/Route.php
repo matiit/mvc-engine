@@ -3,7 +3,7 @@
 namespace Core\Router;
 
 /**
- * This is routing file, containing getters & setters
+ * This is routing file, contains getters & setters
  * for correct route working.
  *
  * Class Route
@@ -27,7 +27,7 @@ class Route
      */
     protected $path;
     /**
-     * File, which containing controller class.
+     * File, which contains name of controller class.
      *
      * @var string
      */
@@ -61,16 +61,17 @@ class Route
      * Route constructor.
      *
      * @param string $path
-     * @param array  $config
-     * @param array  $params
-     * @param array  $defaults
+     * @param array $config
+     * @param array $params
+     * @param array $defaults
      */
     public function __construct(
         string $path,
         array $config,
         array $params = [],
         array $defaults = []
-    ) {
+    )
+    {
         $this->path = $path;
         $this->file = 'src/Controller/' . $config['file'];
         $this->class = 'Controller\\' . $config['class'];

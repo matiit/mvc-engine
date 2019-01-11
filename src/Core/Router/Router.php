@@ -2,6 +2,8 @@
 
 namespace Core\Router;
 
+use Utils\StringUtils;
+
 /**
  * That's main class of routing system, taking part in
  * true URL reading.
@@ -21,29 +23,45 @@ namespace Core\Router;
 class Router
 {
     /**
+     * A string that contains name
+     * of the URL.
+     *
      * @var string
      */
     protected $url;
 
     /**
-     * @var mixed
+     * Collection, which contains all routes.
+     *
+     * @var object
      */
     protected static $collection;
 
     /**
+     * Name of controller file.
+     *
      * @var string
      */
     protected $file;
 
     /**
-     * @var \stdClass
+     * Name of controller class.
+     *
+     * @var string
      */
     protected $class;
 
     /**
+     * Name of function in assigned class.
+     *
      * @var string
      */
     protected $method;
+
+    /**
+     * @var \stdClass
+     */
+    private $stringUtils;
 
     /**
      * Router constructor.
@@ -53,6 +71,8 @@ class Router
      */
     public function __construct(string $url, ?object $collection = null)
     {
+        $this->stringUtils = new StringUtils();
+
         if ($collection != null) {
             self::$collection = $collection;
         }
@@ -104,7 +124,7 @@ class Router
     /**
      * @return string|null
      */
-    public function getFile():?string
+    public function getFile(): ?string
     {
         return $this->file;
     }
@@ -120,7 +140,7 @@ class Router
     /**
      * @return string|null
      */
-    public function getClass():?string
+    public function getClass(): ?string
     {
         return $this->class;
     }
@@ -136,13 +156,13 @@ class Router
     /**
      * @return string|null
      */
-    public function getMethod():?string
+    public function getMethod(): ?string
     {
         return $this->method;
     }
 
     /**
-     * @param  Route $route
+     * @param Route $route
      * @return bool
      */
     protected function matchRoute(Route $route): bool
@@ -152,7 +172,7 @@ class Router
         $value_params = $route->getParams();
 
         foreach ($key_params as $key) {
-            $params['{'.$key.'}'] = $value_params[$key];
+            $params['{' . $key . '}'] = $value_params[$key];
         }
 
         $url = $route->getPath();
@@ -161,7 +181,7 @@ class Router
         preg_match("#^$url$#", $this->url, $results);
 
         if ($results) {
-            $this->url = str_replace([$this->strlcs($url, $this->url)], [''], $this->url);
+            $this->url = str_replace([($this->stringUtils->strlcs($url, $this->url))], [''], $this->url);
             $this->file = $route->getFile();
             $this->class = $route->getClass();
             $this->method = $route->getMethod();
@@ -187,6 +207,8 @@ class Router
     }
 
     /**
+     * Checks, did url is correct.
+     *
      * @param Route $route
      */
     protected function setGetData(Route $route)
@@ -204,7 +226,7 @@ class Router
             preg_match("#$param#", $parsed_url, $results);
             if (!empty($results[0])) {
                 $_GET[$key] = $results[0];
-                $temp_url   = explode($results[0], $parsed_url, 2);
+                $temp_url = explode($results[0], $parsed_url, 2);
                 $parsed_url = $temp_url[1];
             }
         }
@@ -213,59 +235,6 @@ class Router
             if (!isset($_GET[$key])) {
                 $_GET[$key] = $default;
             }
-        }
-    }
-
-    /**
-     * @param string$str1
-     * @param string $str2
-     * @return array|mixed|string
-     */
-    protected function strlcs($str1, $str2)
-    {
-        $str1Len = strlen($str1);
-        $str2Len = strlen($str2);
-        $ret     = [];
-
-        if ($str1Len == 0 || $str2Len == 0) {
-            return $ret;
-        }
-
-        $CSL            = [];
-        $intLargestSize = 0;
-
-        for ($i = 0; $i < $str1Len; $i++) {
-            $CSL[$i] = [];
-            for ($j = 0; $j < $str2Len; $j++) {
-                $CSL[$i][$j] = 0;
-            }
-        }
-
-        for ($i = 0; $i < $str1Len; $i++) {
-            for ($j = 0; $j < $str2Len; $j++) {
-                if ($str1[$i] == $str2[$j]) {
-                    if ($i == 0 || $j == 0) {
-                        $CSL[$i][$j] = 1;
-                    } else {
-                        $CSL[$i][$j] = ($CSL[($i - 1)][($j - 1)] + 1);
-                    }
-
-                    if ($CSL[$i][$j] > $intLargestSize) {
-                        $intLargestSize = $CSL[$i][$j];
-                        $ret            = [];
-                    }
-
-                    if ($CSL[$i][$j] == $intLargestSize) {
-                        $ret[] = substr($str1, ($i - $intLargestSize + 1), $intLargestSize);
-                    }
-                }
-            }
-        }
-
-        if (isset($ret[0])) {
-            return $ret[0];
-        } else {
-            return '';
         }
     }
 }

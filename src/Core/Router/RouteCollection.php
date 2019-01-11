@@ -37,7 +37,7 @@ class RouteCollection
      * @param  string $name
      * @return array|null
      */
-    public function get(string $name):? array
+    public function get(string $name): ?array
     {
         if (array_key_exists($name, $this->route)) {
             return $this->route[$name];
@@ -49,7 +49,7 @@ class RouteCollection
     /**
      * @return array
      */
-    public function getAll():? array
+    public function getAll(): ?array
     {
         return $this->route;
     }
