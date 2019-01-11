@@ -28,7 +28,7 @@ class StringUtils
      * @param string $str2
      * @return array|string
      */
-    public function strlcs(string $str1, string $str2)
+    public static function strlcs(string $str1, string $str2)
     {
         $str1Len = strlen($str1);
         $str2Len = strlen($str2);

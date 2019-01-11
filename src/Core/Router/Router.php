@@ -59,11 +59,6 @@ class Router
     protected $method;
 
     /**
-     * @var \stdClass
-     */
-    private $stringUtils;
-
-    /**
      * Router constructor.
      *
      * @param string $url
@@ -71,8 +66,6 @@ class Router
      */
     public function __construct(string $url, ?object $collection = null)
     {
-        $this->stringUtils = new StringUtils();
-
         if ($collection != null) {
             self::$collection = $collection;
         }
@@ -181,7 +174,7 @@ class Router
         preg_match("#^$url$#", $this->url, $results);
 
         if ($results) {
-            $this->url = str_replace([($this->stringUtils->strlcs($url, $this->url))], [''], $this->url);
+            $this->url = str_replace([(StringUtils::strlcs($url, $this->url))], [''], $this->url);
             $this->file = $route->getFile();
             $this->class = $route->getClass();
             $this->method = $route->getMethod();
