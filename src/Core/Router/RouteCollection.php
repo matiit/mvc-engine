@@ -22,7 +22,7 @@ class RouteCollection
     /**
      * @var array
      */
-    protected $route = [];
+    protected $routes = [];
 
     /**
      * @param string $name

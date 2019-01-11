@@ -2,8 +2,6 @@
 
 namespace Core\Router;
 
-use mysql_xdevapi\Exception;
-
 /**
  * This is routing file, contains getters & setters
  * for correct route working.

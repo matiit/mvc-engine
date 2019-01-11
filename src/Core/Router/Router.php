@@ -23,8 +23,8 @@ use Utils\StringUtils;
 class Router
 {
     /**
-     * A string that contains name
-     * of the URL.
+     * A string that contains the
+     * content of URL
      *
      * @var string
      */
