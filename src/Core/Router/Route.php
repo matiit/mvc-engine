@@ -71,19 +71,19 @@ class Route
     {
         $this->path = $path;
 
-        try{
-            if(isset($config['file']) && isset($config['class']) && isset($config['method'])){
+        try {
+            if (isset($config['file']) && isset($config['class']) && isset($config['method'])) {
                 $this->file = 'src/Controller/' . $config['file'];
                 $this->class = 'Controller\\' . $config['class'];
                 $this->method = $config['method'];
-            }else{
+            } else {
                 throw new \Exception('Config is not valid.');
             }
-        }catch (\Exception $e){
-            echo $e->getMessage().'<br>
-            File: '.$e->getFile().'<br>
-            Line: '.$e->getLine().'<br>
-            Trace: '.$e->getTraceAsString();
+        } catch (\Exception $e) {
+            echo $e->getMessage() . '<br>
+            File: ' . $e->getFile() . '<br>
+            Line: ' . $e->getLine() . '<br>
+            Trace: ' . $e->getTraceAsString();
             exit;
         }
         $this->setParams($params);

@@ -35,9 +35,9 @@ class RouteCollection
 
     /**
      * @param  string $name
-     * @return array|null
+     * @return string|null
      */
-    public function get(string $name): ?array
+    public function get(string $name): ?string
     {
         if (array_key_exists($name, $this->route)) {
             return $this->route[$name];
